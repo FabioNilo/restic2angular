@@ -20,24 +20,24 @@ export interface ShoppingItem {
 export class ListaComprasComponent {
   items: { item: string, quantity: number,editing:boolean, purchased: boolean }[] = [];
 
-  // Função para adicionar novo item
+ 
   addItem(newItem: { item: string; quantity: number }) {
     this.items.push({ ...newItem, editing: false,purchased:false });
   }
 
-  // Função para remover um item
+  
   removeItem(index: number) {
     this.items.splice(index, 1);
   }
 
-  // Função para habilitar a edição de um item
+  
   enableEdit(index: number) {
     this.items[index].editing = true;
   }
 
-  // Função para salvar as alterações
+
   saveEdit(index: number) {
-    this.items[index].editing = false; // Sai do modo de edição
+    this.items[index].editing = false; 
   }
 
   
