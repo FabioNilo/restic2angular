@@ -1,0 +1,5 @@
+<form [formGroup]="shoppingForm" (ngSubmit)="onSubmit()">
+    <input formControlName="item" placeholder="Novo item" />
+    <input formControlName="quantity" type="number" placeholder="Quantidade" min="1" />
+    <button type="submit" [disabled]="shoppingForm.invalid">Adicionar</button>
+  </form>
