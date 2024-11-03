@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "item": "arroz",
+    "quantity": 4,
+    "editing": false,
+    "purchased": true
+  },
+  {
+    "id": "11",
+    "item": "macarrão",
+    "quantity": 12,
+    "editing": false,
+    "purchased": false
+  }
+]

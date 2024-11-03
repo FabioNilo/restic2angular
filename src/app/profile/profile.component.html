@@ -1,0 +1,48 @@
+<header class="header">
+    <div class="header-container">
+      <div class="header-content">
+        <div class="logo-section">
+          <h1>Organazzi-App</h1>
+          <p></p>
+        </div>
+  
+        <div class="profile-section">
+          <div>
+            <button (click)="toggleMenu()" class="profile-button">
+              <img
+                *ngIf="profile?.picture"
+                [src]="profile?.picture"
+                [alt]="profile?.name || 'User profile'"
+                class="profile-image"
+              >
+              <span *ngIf="!profile?.picture" class="profile-placeholder">
+                <i class="fas fa-user"></i>
+              </span>
+              <span class="profile-name">
+                {{profile?.name || 'Usuário'}}
+              </span>
+              <i class="fas fa-chevron-down arrow-icon"></i>
+            </button>
+          </div>
+  
+          <div *ngIf="isMenuOpen" class="dropdown-menu">
+            <div class="dropdown-content">
+              <div class="user-info">
+                <p class="user-name">{{profile?.name}}</p>
+                <p class="user-email">{{profile?.email}}</p>
+              </div>
+              
+              <button class="menu-item">
+                <i class="fas fa-cog"></i>
+                Configurações
+              </button>
+              <button (click)="logout()" class="menu-item logout">
+                <i class="fas fa-sign-out-alt"></i>
+                Sair
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>

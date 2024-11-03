@@ -1,22 +1,26 @@
+<app-profile></app-profile>
 <div class="container">
     <h2>Lista de Compras</h2>
     <h3>Relação dos itens</h3>
   <ul>
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
     <ng-container *ngFor="let item of items; let i = index">
       <li *ngIf="!item.purchased">
         <div *ngIf="!item.editing">
           Descrição: {{ item.item }}, Quantidade: {{ item.quantity }}
           
-          <button (click)="togglePurchased(i)" class="buy">
+          <button (click)="togglePurchased(item)" class="buy">
             <i class="fas fa-circle"></i>
             Comprar
           </button>
           
-          <button (click)="enableEdit(i)" class="edit">
+          <button (click)="enableEdit(item)" class="edit">
             <i class="fas fa-edit"></i> Editar
           </button>
           
-          <button (click)="removeItem(i)">
+          <button (click)="removeItem(item)">
             <i class="fas fa-trash"></i> Remover
           </button>
         </div>
@@ -24,13 +28,40 @@
         <div *ngIf="item.editing">
           <input [(ngModel)]="item.item" placeholder="Descrição" />
           <input [(ngModel)]="item.quantity" type="number" placeholder="Quantidade" min="1" />
-          <button (click)="saveEdit(i)" class="saved">Salvar</button>
-          <button (click)="cancelEdit(i)">Cancelar</button>
+          <button (click)="saveEdit(item)" class="saved">Salvar</button>
+          <button (click)="cancelEdit(item)">Cancelar</button>
+        </div>
+      </li>
+    </ng-container>
+    <ng-container *ngFor="let item of itemSave(); let i = index">
+      <li *ngIf="!item.purchased">
+        <div *ngIf="!item.editing">
+          Descrição: {{ item.item }}, Quantidade: {{ item.quantity }}
+          
+          <button (click)="togglePurchased(item)" class="buy">
+            <i class="fas fa-circle"></i>
+            Comprar
+          </button>
+          
+          <button (click)="enableEdit(item)" class="edit">
+            <i class="fas fa-edit"></i> Editar
+          </button>
+          
+          <button (click)="removeItem(item)">
+            <i class="fas fa-trash"></i> Remover
+          </button>
+        </div>
+
+        <div *ngIf="item.editing">
+          <input [(ngModel)]="item.item" placeholder="Descrição" />
+          <input [(ngModel)]="item.quantity" type="number" placeholder="Quantidade" min="1" />
+          <button (click)="saveEdit(item)" class="saved">Salvar</button>
+          <button (click)="cancelEdit(item)">Cancelar</button>
         </div>
       </li>
     </ng-container>
   </ul>
-
+  <app-form-compras (newItemEvent)="onNewItem($event)"></app-form-compras>
   <h3>Comprados</h3>
   <ul>
     <ng-container *ngFor="let item of items; let i = index">
@@ -38,16 +69,16 @@
         <div *ngIf="!item.editing">
           Descrição: {{ item.item }}, Quantidade: {{ item.quantity }}
           
-          <button (click)="togglePurchased(i)">
+          <button (click)="togglePurchased(item)">
             <i class="fas fa-check-circle"></i>
             Retirar
           </button>
           
-          <button (click)="enableEdit(i)" class="edit">
+          <button (click)="enableEdit(item)" class="edit">
             <i class="fas fa-edit"></i> Editar
           </button>
           
-          <button (click)="removeItem(i)">
+          <button (click)="removeItem(item)">
             <i class="fas fa-trash"></i> Remover
           </button>
         </div>
@@ -55,11 +86,11 @@
         <div *ngIf="item.editing">
           <input [(ngModel)]="item.item" placeholder="Descrição" />
           <input [(ngModel)]="item.quantity" type="number" placeholder="Quantidade" min="1" />
-          <button (click)="saveEdit(i)" class="saved">Salvar</button>
-          <button (click)="cancelEdit(i)">Cancelar</button>
+          <button (click)="saveEdit(item)" class="saved">Salvar</button>
+          <button (click)="cancelEdit(item)">Cancelar</button>
         </div>
       </li>
     </ng-container>
   </ul>
-<app-form-compras (newItemEvent)="addItem($event)"></app-form-compras>
 </div>
+
